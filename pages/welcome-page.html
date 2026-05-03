@@ -4,11 +4,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Welcome | Orbit Event Hub</title>
+
+    <!-- Link to Stylesheets -->
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/welcome-page.css">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
 
+    <div class="split-container">
+
+        <!-- LEFT SIDE: Authentication / Actions -->
+        <div class="auth-section">
+            <header class="logo-container">
+                <img src="../assets/images/orbitsvg.svg" alt="Orbit Logo" class="orbit-logo">
+                <div class="logo-text">
+                    <span class="bold-text">Orbit</span>
+                    <span class="light-text">Event Hub</span>
+                </div>
+            </header>
+
+            <div class="auth-content">
+                <p class="welcome-text">Welcome to</p>
+                <h1 class="main-title">Orbit<br>Event Hub</h1>
+                <p class="subtitle">The unified hub for university events.</p>
+
+                <div class="auth-buttons">
+                    <button class="btn btn-primary" onclick="window.location.href='pages/login.html'">
+                        <i class="fa-solid fa-user-graduate"></i>
+                        Login as Student
+                        <i class="fa-solid fa-arrow-right right-arrow"></i>
+                    </button>
+
+                    <button class="btn btn-outline" onclick="window.location.href='pages/login.html'">
+                        <i class="fa-solid fa-user-tie"></i>
+                        Login as Admin / Host
+                        <i class="fa-solid fa-arrow-right right-arrow"></i>
+                    </button>
+
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+
+                    <button class="btn btn-google">
+                        <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20px"
+                            height="20px">
+                            <path fill="#EA4335"
+                                d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.7 17.74 9.5 24 9.5z" />
+                            <path fill="#4285F4"
+                                d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+                            <path fill="#FBBC05"
+                                d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+                            <path fill="#34A853"
+                                d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+                        </svg>
+                        Continue with Google
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE: System Info / Marketing -->
+        <div class="info-section">
+            <div class="info-content">
+                <h2 class="info-title">Your campus.<br>Your updates.<br>One platform.</h2>
+                <p class="info-description">Orbit centralizes all university events into a single, easy-to-use digital
+                    hub so you never miss out on what matters.</p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fa-solid fa-bolt feature-icon"></i>
+                        <p>Instant<br>Announcements</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-regular fa-calendar feature-icon"></i>
+                        <p>Event<br>Updates</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-regular fa-bell feature-icon"></i>
+                        <p>Personalized<br>Reminders</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/app.js" defer></script>
 </body>
 
 </html>
