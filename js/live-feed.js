@@ -1,101 +1,92 @@
-const eventsContainer = document.getElementById('eventsContainer');
+const eventsContainer = document.getElementById("eventsContainer");
 
 // USER DATA
 // Replace with Firebase Auth user data later
 const currentUser = {
-  firstName: 'Joan',
-  lastName: 'Azike'
+  firstName: "Joan",
+  lastName: "Azike",
 };
 
 // PROFILE INITIALS
-const profileCircle = document.getElementById('profileInitials');
+const profileCircle = document.getElementById("profileInitials");
 
 const initials = `${currentUser.firstName[0]}${currentUser.lastName[0]}`;
 
 profileCircle.textContent = initials.toUpperCase();
 
 // ACTIVE SIDEBAR BUTTONS
-const currentPage = window.location.pathname.split('/').pop();
+const currentPage = window.location.pathname.split("/").pop();
 
-const menuLinks = document.querySelectorAll('.menu-item, .logout-btn');
+const menuLinks = document.querySelectorAll(".menu-item, .logout-btn");
 
-menuLinks.forEach(link => {
-
-  const href = link.getAttribute('href');
+menuLinks.forEach((link) => {
+  const href = link.getAttribute("href");
 
   if (href === currentPage) {
-    link.classList.add('active');
+    link.classList.add("active");
   }
 });
 
 // FILTER BUTTON ACTIVE STATES
-const filterButtons = document.querySelectorAll('.filter-btn');
+const filterButtons = document.querySelectorAll(".filter-btn");
 
-filterButtons.forEach(button => {
-
-  button.addEventListener('click', () => {
-
-    filterButtons.forEach(btn => {
-      btn.classList.remove('active');
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    filterButtons.forEach((btn) => {
+      btn.classList.remove("active");
     });
 
-    button.classList.add('active');
+    button.classList.add("active");
   });
 });
 
 // CATEGORY DROPDOWN
-const categoryToggle = document.getElementById('categoryToggle');
-const categoryMenu = document.getElementById('categoryMenu');
+const categoryToggle = document.getElementById("categoryToggle");
+const categoryMenu = document.getElementById("categoryMenu");
 
-categoryToggle.addEventListener('click', () => {
-
-  categoryMenu.classList.toggle('show');
-  categoryToggle.classList.toggle('active');
+categoryToggle.addEventListener("click", () => {
+  categoryMenu.classList.toggle("show");
+  categoryToggle.classList.toggle("active");
 });
 
-window.addEventListener('click', (e) => {
-
-  if (!e.target.closest('.category-dropdown')) {
-
-    categoryMenu.classList.remove('show');
-    categoryToggle.classList.remove('active');
+window.addEventListener("click", (e) => {
+  if (!e.target.closest(".category-dropdown")) {
+    categoryMenu.classList.remove("show");
+    categoryToggle.classList.remove("active");
   }
 });
 
 // MOBILE SIDEBAR
-const sidebar = document.getElementById('sidebar');
+const sidebar = document.getElementById("sidebar");
 
-const sidebarOverlay = document.getElementById('sidebarOverlay');
+const sidebarOverlay = document.getElementById("sidebarOverlay");
 
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenuBtn = document.getElementById("mobileMenuBtn");
 
-const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+const closeSidebarBtn = document.getElementById("closeSidebarBtn");
 
-mobileMenuBtn.addEventListener('click', () => {
-
-  sidebar.classList.add('show');
-  sidebarOverlay.classList.add('show');
+mobileMenuBtn.addEventListener("click", () => {
+  sidebar.classList.add("show");
+  sidebarOverlay.classList.add("show");
 });
 
-closeSidebarBtn.addEventListener('click', closeSidebar);
+closeSidebarBtn.addEventListener("click", closeSidebar);
 
-sidebarOverlay.addEventListener('click', closeSidebar);
+sidebarOverlay.addEventListener("click", closeSidebar);
 
 function closeSidebar() {
-
-  sidebar.classList.remove('show');
-  sidebarOverlay.classList.remove('show');
+  sidebar.classList.remove("show");
+  sidebarOverlay.classList.remove("show");
 }
 
 // LOGOUT BUTTON
-const logoutBtn = document.getElementById('logoutBtn');
+const logoutBtn = document.getElementById("logoutBtn");
 
-logoutBtn.addEventListener('click', (e) => {
-
+logoutBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
   // Redirect to browser home page
-  window.location.href = 'welcome-page.html';
+  window.location.href = "welcome-page.html";
 });
 
 // SAMPLE EVENTS
@@ -103,57 +94,55 @@ logoutBtn.addEventListener('click', (e) => {
 const events = [
   {
     id: 1,
-    title: 'Tech Innovation Workshop',
-    date: 'May 20, 2026',
-    time: '10:00 AM',
-    location: 'Room A1, Engineering Building',
+    title: "Tech Innovation Workshop",
+    date: "May 20, 2026",
+    time: "10:00 AM",
+    location: "Room A1, Engineering Building",
     description:
-      'Gain hands-on experience with emerging tech and innovative tools shaping the future.',
+      "Gain hands-on experience with emerging tech and innovative tools shaping the future.",
     image:
-      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop',
-    category: 'On Campus',
-    registrationLink: 'https://example.com/register'
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop",
+    category: "On Campus",
+    registrationLink: "https://example.com/register",
   },
 
   {
     id: 2,
-    title: 'Music Night',
-    date: 'May 25, 2026',
-    time: '6:00 PM',
-    location: 'Main Auditorium',
+    title: "Music Night",
+    date: "May 25, 2026",
+    time: "6:00 PM",
+    location: "Main Auditorium",
     description:
-      'An evening of live performances by university music clubs and special guests.',
+      "An evening of live performances by university music clubs and special guests.",
     image:
-      'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?q=80&w=1200&auto=format&fit=crop',
-    category: 'Auditorium',
-    registrationLink: ''
+      "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?q=80&w=1200&auto=format&fit=crop",
+    category: "Auditorium",
+    registrationLink: "",
   },
 
   {
     id: 3,
-    title: 'Online Career Seminar',
-    date: 'June 5, 2026',
-    time: '4:00 PM',
-    location: 'Microsoft Teams',
+    title: "Online Career Seminar",
+    date: "June 5, 2026",
+    time: "4:00 PM",
+    location: "Microsoft Teams",
     description:
-      'Explore career opportunities, CV tips, and alumni success stories.',
+      "Explore career opportunities, CV tips, and alumni success stories.",
     image:
-      'https://images.unsplash.com/photo-1516321165247-4aa89a48be28?q=80&w=1200&auto=format&fit=crop',
-    category: 'Online',
-    registrationLink: 'https://example.com/join'
-  }
+      "https://images.unsplash.com/photo-1516321165247-4aa89a48be28?q=80&w=1200&auto=format&fit=crop",
+    category: "Online",
+    registrationLink: "https://example.com/join",
+  },
 ];
 
 // DISPLAY EVENTS
 function displayEvents(eventList) {
-
-  eventsContainer.innerHTML = '';
+  eventsContainer.innerHTML = "";
 
   eventList.forEach((event, index) => {
+    const eventCard = document.createElement("div");
 
-    const eventCard = document.createElement('div');
-
-    eventCard.classList.add('event-card');
+    eventCard.classList.add("event-card");
 
     eventCard.style.animationDelay = `${index * 0.08}s`;
 
@@ -197,8 +186,9 @@ function displayEvents(eventList) {
 
           <div class="card-footer">
 
-            ${event.registrationLink
-              ? `
+            ${
+              event.registrationLink
+                ? `
                 <a
                   href="${event.registrationLink}"
                   target="_blank"
@@ -209,7 +199,8 @@ function displayEvents(eventList) {
                   </button>
                 </a>
               `
-              : ''}
+                : ""
+            }
 
           </div>
 
@@ -223,15 +214,13 @@ function displayEvents(eventList) {
   });
 
   // EVENT CARD CLICK
-  const clickableCards = document.querySelectorAll('.event-card-link');
+  const clickableCards = document.querySelectorAll(".event-card-link");
 
-  clickableCards.forEach(card => {
-
-    card.addEventListener('click', (e) => {
-
+  clickableCards.forEach((card) => {
+    card.addEventListener("click", (e) => {
       if (
-        e.target.closest('.save-btn') ||
-        e.target.closest('.register-btn-link')
+        e.target.closest(".save-btn") ||
+        e.target.closest(".register-btn-link")
       ) {
         return;
       }
@@ -249,51 +238,46 @@ displayEvents(events);
 // SAVE BUTTON TOGGLE
 // SAVE TOAST
 
-const saveToast = document.getElementById('saveToast');
+const saveToast = document.getElementById("saveToast");
 
-const toastText = document.getElementById('toastText');
+const toastText = document.getElementById("toastText");
 
 let toastTimeout;
 
 function showToast(message) {
-
   toastText.textContent = message;
 
-  saveToast.classList.add('show');
+  saveToast.classList.add("show");
 
   clearTimeout(toastTimeout);
 
   toastTimeout = setTimeout(() => {
-    saveToast.classList.remove('show');
+    saveToast.classList.remove("show");
   }, 2200);
 }
-document.addEventListener('click', function (e) {
-
-  const saveBtn = e.target.closest('.save-btn');
+document.addEventListener("click", function (e) {
+  const saveBtn = e.target.closest(".save-btn");
 
   if (!saveBtn) return;
 
   e.preventDefault();
   e.stopPropagation();
 
-  saveBtn.classList.toggle('saved');
+  saveBtn.classList.toggle("saved");
 
-  const icon = saveBtn.querySelector('i');
+  const icon = saveBtn.querySelector("i");
 
- if (saveBtn.classList.contains('saved')) {
+  if (saveBtn.classList.contains("saved")) {
+    icon.classList.remove("fa-regular");
+    icon.classList.add("fa-solid");
 
-  icon.classList.remove('fa-regular');
-  icon.classList.add('fa-solid');
+    showToast("Event Saved");
+  } else {
+    icon.classList.remove("fa-solid");
+    icon.classList.add("fa-regular");
 
-  showToast('Event Saved');
-
-} else {
-
-  icon.classList.remove('fa-solid');
-  icon.classList.add('fa-regular');
-
-  showToast('Event Removed');
-}
+    showToast("Event Removed");
+  }
 });
 
 /*

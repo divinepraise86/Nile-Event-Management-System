@@ -1,179 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Live Event Feed</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <link rel="stylesheet" href="../css/live-feed.css" />
+  <link rel="stylesheet" href="../css/global.css">
 </head>
 
 <body>
 
-<div class="dashboard-container">
+  <div class="dashboard-container">
 
-  <!-- MOBILE OVERLAY -->
-  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <!-- MOBILE OVERLAY -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar" id="sidebar">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
 
-    <div>
+      <div>
 
-      <div class="sidebar-top">
+        <div class="sidebar-top">
 
-        <div class="logo">
-          <img src="../assets/images/orbitsvg.svg" alt="Logo">
-        </div>
+          <header class="logo-container">
+            <img src="../assets/images/orbitsvg.svg" alt="Orbit Logo" class="orbit-logo">
+            <div class="logo-text">
+              <span class="bold-text">Orbit</span>
+              <span class="light-text">Event Hub</span>
+            </div>
+          </header>
 
-        <button class="close-sidebar-btn" id="closeSidebarBtn">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
 
-      </div>
-
-      <nav class="sidebar-menu">
-
-        <a href="index.html" class="menu-item active">
-          <i class="fa-solid fa-house"></i>
-          <span>Home</span>
-        </a>
-
-        <a href="my-events.html" class="menu-item">
-          <i class="fa-regular fa-calendar"></i>
-          <span>My Events</span>
-        </a>
-
-        <!-- LOGOUT -->
-        <a href="#" class="logout-btn" id="logoutBtn">
-          <i class="fa-solid fa-arrow-right-from-bracket"></i>
-          <span>Logout</span>
-        </a>
-
-      </nav>
-
-    </div>
-
-  </aside>
-
-  <!-- MAIN CONTENT -->
-  <main class="main-content">
-
-    <!-- HEADER -->
-    <header class="top-header">
-
-      <div class="header-left">
-
-        <!-- MOBILE MENU BUTTON -->
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-
-        <div>
-          <h1>Live Event Feed</h1>
-          <p>Discover what's happening at Nile University.</p>
-        </div>
-
-      </div>
-
-      <div class="header-right">
-
-        <div class="search-box">
-          <i class="fa-solid fa-magnifying-glass"></i>
-
-          <input
-            type="text"
-            placeholder="Search events by title, date, category..."
-          />
-        </div>
-
-       <!-- BELL ICON AND PROFILE -->
-
-        <button class="icon-btn">
-          <i class="fa-regular fa-bell"></i>
-        </button>
-
-        <div class="profile-circle" id="profileInitials"></div>
-
-      </div>
-
-    </header>
-
-    <!-- FILTERS -->
-    <section class="filters-section">
-
-      <div class="filters-left">
-
-        <button class="filter-btn active">All</button>
-        <button class="filter-btn">Today</button>
-        <button class="filter-btn">This Week</button>
-        <button class="filter-btn">This Month</button>
-
-        <!-- CATEGORY DROPDOWN -->
-        <div class="category-dropdown">
-
-          <button class="category-btn" id="categoryToggle">
-            Category
-            <i class="fa-solid fa-chevron-down"></i>
+          <button class="close-sidebar-btn" id="closeSidebarBtn">
+            <i class="fa-solid fa-xmark"></i>
           </button>
 
-          <div class="category-menu" id="categoryMenu">
+        </div>
 
-            <div class="category-item">Tech</div>
-            <div class="category-item">Music</div>
-            <div class="category-item">Sports</div>
-            <div class="category-item">Workshop</div>
-            <div class="category-item">Career</div>
+        <nav class="sidebar-menu">
+
+          <a href="index.html" class="menu-item active">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+          </a>
+
+          <a href="my-events.html" class="menu-item">
+            <i class="fa-regular fa-calendar"></i>
+            <span>My Events</span>
+          </a>
+
+          <!-- LOGOUT -->
+          <a href="#" class="logout-btn" id="logoutBtn">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Logout</span>
+          </a>
+
+        </nav>
+
+      </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <!-- HEADER -->
+      <header class="top-header">
+
+        <div class="header-left">
+
+          <!-- MOBILE MENU BUTTON -->
+          <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <div>
+            <h1>Live Event Feed</h1>
+            <p>Discover what's happening at Nile University.</p>
+          </div>
+
+        </div>
+
+        <div class="header-right">
+
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input type="text" placeholder="Search events by title, date, category..." />
+          </div>
+
+          <!-- BELL ICON AND PROFILE -->
+
+          <button class="icon-btn">
+            <i class="fa-regular fa-bell"></i>
+          </button>
+
+          <div class="profile-circle" id="profileInitials"></div>
+
+        </div>
+
+      </header>
+
+      <!-- FILTERS -->
+      <section class="filters-section">
+
+        <div class="filters-left">
+
+          <button class="filter-btn active">All</button>
+          <button class="filter-btn">Today</button>
+          <button class="filter-btn">This Week</button>
+          <button class="filter-btn">This Month</button>
+
+          <!-- CATEGORY DROPDOWN -->
+          <div class="category-dropdown">
+
+            <button class="category-btn" id="categoryToggle">
+              Category
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="category-menu" id="categoryMenu">
+
+              <div class="category-item">Tech</div>
+              <div class="category-item">Music</div>
+              <div class="category-item">Sports</div>
+              <div class="category-item">Workshop</div>
+              <div class="category-item">Career</div>
+
+            </div>
 
           </div>
 
         </div>
 
-      </div>
+        <!-- GRID VIEW -->
+        <div class="view-icons">
 
-      <!-- GRID VIEW -->
-      <div class="view-icons">
+          <button class="view-btn active">
+            <i class="fa-solid fa-grip"></i>
+          </button>
 
-        <button class="view-btn active">
-          <i class="fa-solid fa-grip"></i>
-        </button>
+        </div>
 
-      </div>
+      </section>
 
-    </section>
+      <!-- EVENTS -->
+      <section class="events-grid" id="eventsContainer">
+        <!-- Events inserted dynamically -->
+      </section>
 
-    <!-- EVENTS -->
-    <section class="events-grid" id="eventsContainer">
-      <!-- Events inserted dynamically -->
-    </section>
+    </main>
 
-  </main>
+  </div>
 
-</div>
+  <!-- SAVE NOTIFICATION -->
+  <div class="save-toast" id="saveToast">
+    <i class="fa-solid fa-bookmark"></i>
+    <span id="toastText">Event Saved</span>
+  </div>
 
-<!-- SAVE NOTIFICATION -->
-<div class="save-toast" id="saveToast">
-  <i class="fa-solid fa-bookmark"></i>
-  <span id="toastText">Event Saved</span>
-</div>
-
-<script src="../js/live-feed.js"></script>
+  <script src="../js/live-feed.js"></script>
 
 </body>
+
 </html>
