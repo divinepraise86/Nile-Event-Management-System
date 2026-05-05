@@ -1,0 +1,35 @@
+/* Google Fonts Import - Poppins for a modern, clean look */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+:root {
+  /* Brand Colors */
+  --primary-blue: #0047a5;
+  --primary-hover: #003680;
+  --background-color: #f8f9fe;
+  --text-main: #1a1a1a;
+  --text-muted: #666666;
+  --white: #ffffff;
+
+  /* Shadows & Radii */
+  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --btn-shadow: 0 4px 14px rgba(0, 71, 165, 0.25);
+  --border-radius-lg: 16px;
+  --border-radius-md: 12px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}

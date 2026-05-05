@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event System</title>
+<script src="evp.js"></script>
+<link rel="stylesheet" href="evp.css">
+</head>
+<div class="container">
+
+  <!-- EVENT 1 -->
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998">
+    <div class="content">
+      <h2 class="title">Tech Innovation Workshop</h2>
+      <p class="info date">May 20 | 10AM - 12PM</p>
+      <p class="info location">Engineering Building</p>
+      <p>Learn AI, IoT and software development.</p>
+      <p class="description">
+        Join an immersive workshop focused on emerging technologies including Artificial Intelligence,
+        Internet of Things, and modern software engineering practices. Perfect for students looking
+        to build practical skills.
+      </p>
+  
+      
+
+      <button class="primary" onclick="registerEvent()">Register</button>
+      <button class="secondary saveBtn">Save Event</button>
+    </div>
+  </div>
+
+  <!-- EVENT 2 -->
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd">
+    <div class="content">
+      <h2 class="title">Startup Pitch Day</h2>
+      <p class="info date">June 5 | 1PM - 4PM</p>
+      <p class="info location">Main Auditorium</p>
+      <p>Watch students pitch business ideas.</p>
+      <p class="description">
+        Watch innovative student startups present their ideas to a panel of judges.
+        This event highlights creativity, entrepreneurship, and real-world problem solving.
+      </p>
+  
+      
+      <button class="primary" onclick="registerEvent()">Register</button>
+      <button class="secondary saveBtn">Save Event</button>
+    </div>
+  </div>
+
+  <!-- EVENT 3 -->
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f">
+    <div class="content">
+      <h2 class="title">Coding Bootcamp</h2>
+      <p class="info date">June 12 | 9AM - 3PM</p>
+      <p class="info location">Lab 2</p>
+      <p>Hands-on coding for beginners.</p>
+      <p class="description">
+        A full-day hands-on coding bootcamp designed for beginners and intermediate developers.
+        Learn by building real applications with guidance from experienced mentors.
+      </p>
+
+      <button class="primary" onclick="registerEvent()">Register</button>
+      <button class="secondary saveBtn">Save Event</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- MY EVENTS -->
+<div class="container" id="myEvents">
+  <h2>My Events</h2>
+  <div id="savedList"></div>
+</div>
