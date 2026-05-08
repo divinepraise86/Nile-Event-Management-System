@@ -1,0 +1,74 @@
+<!-- my-events.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Orbit • My Events</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../css/my-events.css" />
+
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+</head>
+
+<body>
+
+  <!-- BACKGROUND BLUR ORBS -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+
+  <section class="my-events-section">
+
+    <!-- TOP HEADER -->
+    <div class="top-bar">
+
+      <div class="heading-area">
+        <h1>My Events</h1>
+        <p>All your saved events & reminders</p>
+      </div>
+
+      <!-- SEARCH -->
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search saved events..."
+        />
+      </div>
+
+    </div>
+
+    <!-- EVENTS -->
+    <div id="savedEventsContainer" class="events-container"></div>
+
+    <!-- EMPTY STATE -->
+    <div id="emptyState" class="empty-state">
+
+      <div class="empty-icon">
+        <i class="fa-regular fa-calendar"></i>
+      </div>
+
+      <h2>No Saved Events</h2>
+
+      <p>
+        Events saved from the live feed will appear here.
+      </p>
+
+    </div>
+
+  </section>
+
+  <script src="../js/my-events.js"></script>
+
+</body>
+
+</html>
