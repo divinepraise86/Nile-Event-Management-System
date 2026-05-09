@@ -1,14 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orbit - Event Details</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+
+  <link rel="stylesheet" href="../css/event-details.css" />
+</head>
 <body>
 
-</body>
+  <!-- Toast Notification -->
+ <div class="save-toast" id="saveToast">
+  <i class="fa-solid fa-bookmark"></i>
+  <span id="toastText">Event Saved</span>
+</div>
 
+  <main class="event-page">
+
+    <!-- Event Detail Container -->
+    <section class="event-detail-card" id="eventDetailCard">
+
+      <!-- Event Image -->
+      <div class="event-image-wrapper">
+
+        <span class="event-badge" id="locationBadge">
+          On Campus
+        </span>
+
+        <button class="save-icon" id="saveBtn">
+          <i class="fa-regular fa-bookmark"></i>
+        </button>
+
+        <img
+          id="eventPoster"
+          src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop"
+          alt="Event Poster"
+        />
+      </div>
+
+
+      <!-- Event Information -->
+      <div class="event-content">
+
+        <div class="event-heading-section">
+          <h2 id="eventTitle">Tech Innovation Workshop</h2>
+        </div>
+
+
+        <div class="event-meta-grid">
+
+          <div class="meta-item">
+            <i class="fa-regular fa-calendar"></i>
+            <span id="eventDate">May 20, 2026</span>
+          </div>
+
+          <div class="meta-item">
+            <i class="fa-regular fa-clock"></i>
+            <span id="eventTime">10:00 AM - 12:00 PM</span>
+          </div>
+
+          <div class="meta-item full-width">
+            <i class="fa-solid fa-location-dot"></i>
+            <span id="eventVenue">
+              Room A1, Engineering Building
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="divider"></div>
+
+
+        <!-- Full Description -->
+        <div class="event-description">
+          <p id="eventDescription">
+            Join us for an immersive and interactive workshop exploring the latest innovations in Artificial Intelligence, software engineering, robotics, and startup technology.
+
+            Students will engage in hands-on demonstrations, networking sessions, and practical discussions led by experienced industry professionals.
+
+            Open to all students. Limited seats available.
+          </p>
+        </div>
+
+
+        <!-- Action Buttons -->
+        <div class="action-buttons" id="actionButtons">
+
+          <a
+            href="#"
+            target="_blank"
+            id="registerBtn"
+            class="primary-btn"
+          >
+            <span>Register Now</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+
+
+          <button id="reminderBtn" class="secondary-btn">
+            <i class="fa-regular fa-calendar-plus"></i>
+            <span>Set Reminder</span>
+          </button>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/event-details.js"></script>
+</body>
 </html>
