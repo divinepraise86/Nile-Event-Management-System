@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration | Orbit Event Hub</title>
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="login-container">
+        <div class="login-card">
+
+            <header class="login-header">
+                <img src="../assets/images/orbitsvg.svg" alt="Orbit Logo" class="login-logo">
+                <h2>Create Account</h2>
+                <p>Join the Orbit student community.</p>
+            </header>
+
+            <form id="signupForm" class="login-form">
+                <div class="input-group">
+                    <label for="fullName">Full Name</label>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-user"></i>
+                        <input type="text" id="fullName" placeholder="e.g. John Doe" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Nile University Email</label>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="email" placeholder="student@nileuniversity.edu.ng" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Create Password</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="password" placeholder="Min. 6 characters" required minlength="6">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit" id="signupBtn">
+                    Register as Student
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <p>Already have an account? <a href="login-student.html">Sign In</a></p>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="module" src="../js/signup-student.js"></script>
+</body>
+
+</html>

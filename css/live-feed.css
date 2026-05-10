@@ -13,6 +13,10 @@ body {
   background: #f5f7fb;
   color: #111827;
   overflow-x: hidden;
+  /* Force body to ignore global margins */
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100%;
 }
 
 button,
@@ -24,6 +28,19 @@ a {
 .dashboard-container {
   display: flex;
   min-height: 100vh;
+  /* Force the container to stretch the full width of the screen */
+  width: 100%;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+/* BRAND ACTIVE STATE */
+.menu-item.active,
+.logout-btn.active {
+  background: #e6effa;
+  color: #0047a5;
+  font-weight: 600;
+  border-left: 4px solid #ecb730; /* The Yellow Touch! */
 }
 
 /* SIDEBAR OVERLAY */
@@ -53,6 +70,12 @@ a {
   justify-content: space-between;
   transition: 0.35s ease;
   z-index: 999;
+
+  /* NEW: Sticky Sidebar Rules */
+  position: sticky;
+  top: 0;
+  height: 100vh; /* Locks the sidebar to the exact height of your monitor */
+  overflow-y: auto; /* Allows the sidebar to scroll internally if you add 50 links later! */
 }
 
 .sidebar-top {
@@ -143,7 +166,7 @@ a {
 /* MAIN CONTENT */
 .main-content {
   flex: 1;
-  padding: 30px;
+  padding: 30px; /* Back to the original 30px! */
   width: 100%;
 }
 
@@ -364,7 +387,8 @@ a {
 .events-grid {
   margin-top: 30px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* Back to the responsive smart grid! */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 25px;
 }
 

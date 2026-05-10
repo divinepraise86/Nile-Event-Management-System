@@ -6,158 +6,439 @@
 }
 
 body {
-  background: #f4f6fb;
+  display: block !important;
+  background: #f5f7fb;
+  color: #111827;
+  overflow-x: hidden;
+}
+
+button,
+input,
+a,
+select,
+textarea {
+  font-family: inherit;
+}
+
+/* =========================================================
+   1. DASHBOARD LAYOUT & SIDEBAR
+========================================================= */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.35s ease;
+  z-index: 998;
+}
+.sidebar-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sidebar {
+  width: 240px;
+  background: white;
+  border-right: 1px solid #e5e7eb;
+  padding: 25px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: 0.35s ease;
+  z-index: 999;
+
+  /* NEW: Sticky Sidebar Rules */
+  position: sticky;
+  top: 0;
+  height: 100vh; /* Locks the sidebar to the exact height of your monitor */
+  overflow-y: auto; /* Allows the sidebar to scroll internally if you add 50 links later! */
+}
+.sidebar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 0px;
+}
+.orbit-logo {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+}
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+/* BRAND BLUE */
+.bold-text {
+  font-weight: 700;
+  font-size: 18px;
+  color: #0047a5;
+}
+.light-text {
+  font-weight: 400;
+  font-size: 14px;
+  color: #6b7280;
+}
+.close-sidebar-btn {
+  display: none;
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.sidebar-menu {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.menu-item,
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: #6b7280;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.25s ease;
+  font-size: 15px;
+}
+.menu-item:hover,
+.logout-btn:hover {
+  background: #f3f4f6;
+  transform: translateX(5px);
+}
+
+/* BRAND ACTIVE STATE */
+.menu-item.active,
+.logout-btn.active {
+  background: #e6effa;
+  color: #0047a5;
+  font-weight: 600;
+  border-left: 4px solid #ecb730; /* Injecting the yellow! */
+}
+
+.main-content {
+  flex: 1;
+  padding: 30px;
+  width: 100%;
+}
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.mobile-menu-btn {
+  display: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.3s ease;
+}
+.mobile-menu-btn:hover {
+  transform: scale(1.05);
+}
+.top-header h1 {
+  font-size: 34px;
+  margin-bottom: 6px;
+}
+.top-header p {
+  color: #6b7280;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile-circle {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #0047a5;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  transition: 0.3s ease;
+}
+.profile-circle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(236, 183, 48, 0.5);
+}
+
+/* =========================================================
+   2. CREATE EVENT FORM STYLES
+========================================================= */
+.form-wrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 40px 0;
-}
-
-/* Container */
-.container {
+  align-items: flex-start;
+  padding-top: 40px;
   width: 100%;
-  max-width: 600px;
-  padding: 20px;
+}
+.split-container {
+  display: grid;
+  grid-template-columns: 35% 65%;
+  gap: 40px;
+  width: 100%;
+  max-width: 1050px;
+  align-items: flex-start;
 }
 
-/* Card */
-.card {
-  background: #fff;
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-  border: 1px solid #06359a;
+.form-instructions {
+  padding-top: 10px;
 }
-
-.card h2 {
-  margin-bottom: 5px;
+.form-instructions h2 {
+  font-size: 26px;
+  color: #111827;
+  margin-bottom: 8px;
 }
-
-.subtitle {
-  font-size: 13px;
-  color: #777;
+.form-instructions p {
+  font-size: 13.5px;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+.guideline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
   margin-bottom: 20px;
 }
+.guideline-item i {
+  color: #0047a5;
+  font-size: 20px;
+  margin-top: 2px;
+}
+.guideline-item strong {
+  display: block;
+  font-size: 14.5px;
+  color: #111827;
+  margin-bottom: 2px;
+}
+.guideline-item span {
+  font-size: 12.5px;
+  color: #6b7280;
+}
 
-/* Form */
-form label {
+.card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+}
+.card label {
   display: flex;
   align-items: center;
-  font-size: 15px;
+  font-size: 13px;
   margin-bottom: 6px;
   margin-top: 15px;
   color: #333;
-  font-weight: 750;
+  font-weight: 600;
 }
-
-/* Inputs */
-input, select, textarea {
+.card input,
+.card select,
+.card textarea {
   width: 100%;
-  padding: 10px;
+  padding: 10px 14px;
   border-radius: 8px;
   border: 1px solid #ddd;
   font-size: 14px;
   outline: none;
+  transition: 0.3s ease;
+}
+.card input:focus,
+.card textarea:focus,
+.card select:focus {
+  border-color: #0047a5;
+  box-shadow: 0 0 0 3px rgba(0, 71, 165, 0.1);
 }
 
-input:focus, textarea:focus, select:focus {
-  border-color: #06359a;
-}
-
-/* Upload Box */
-.upload-box {
+.compact-upload {
   border: 2px dashed #ddd;
   border-radius: 10px;
-  text-align: center;
-  padding: 20px;
+  padding: 16px 20px;
   color: #777;
   cursor: pointer;
   transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-align: left;
 }
-
-.upload-box:hover {
-  border-color: #06359a;
+.compact-upload:hover {
+  border-color: #0047a5;
   background: #f9fbff;
 }
-
-.upload-box p {
-  font-size: 24px;
+.compact-upload p {
+  font-size: 22px;
+  margin: 0;
+  color: #0047a5;
 }
-
-.upload-box span {
-  display: block;
-  margin-top: 5px;
+.upload-text-group {
+  display: flex;
+  flex-direction: column;
+}
+.upload-text-group span {
   font-size: 13px;
+  font-weight: 500;
 }
-
-.upload-box small {
+.upload-text-group small {
   font-size: 11px;
   color: #aaa;
 }
 
-/* Row Layout */
 .row {
   display: flex;
-  gap: 10px;
+  gap: 15px;
 }
-
 .row div {
   flex: 1;
 }
-
-/* Textarea */
-textarea {
-  resize: none;
-  height: 80px;
+.card textarea {
+  resize: vertical;
+  min-height: 100px;
 }
 
-/* Button */
-button {
+/* BRANDED BUTTON */
+.card button {
   width: 100%;
-  margin-top: 20px;
-  padding: 12px;
+  margin-top: 25px;
+  padding: 14px;
   border: none;
   border-radius: 10px;
-  background: linear-gradient(90deg, #06359a, #1236ac);
+  background: #0047a5;
   color: #fff;
   font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
-  
-  /* Floating effect */
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0, 71, 165, 0.2);
+  border-bottom: 4px solid #ecb730; /* Startup Yellow Accent */
+}
+.card button:hover {
+  background: #003680;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(236, 183, 48, 0.3);
+}
+.card button:disabled {
+  background: #9ca3af;
+  border-bottom: 4px solid #6b7280;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
-button:hover {
-  opacity: 0.9;
-  
-  /* Lift the button slightly on hover */
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
-  transform: translateY(-3px);
-}
-
-/* ================== MOBILE RESPONSIVE ================== */
-@media (max-width: 650px) {
-  .card {
-    padding: 20px;
-    margin: 0 10px;
+/* =========================================================
+   3. MOBILE RESPONSIVE
+========================================================= */
+@media (max-width: 1100px) {
+  .split-container {
+    gap: 20px;
   }
-
-  .row {
+}
+@media (max-width: 900px) {
+  .split-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .form-instructions {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .dashboard-container {
     flex-direction: column;
   }
-
-  form label {
-    font-size: 14px;
+  .main-content {
+    padding: 20px;
   }
-
-  input, select, textarea {
-    font-size: 13px;
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 260px;
+    height: 100vh;
+    padding: 24px 18px;
+    box-shadow: 10px 0 40px rgba(0, 0, 0, 0.1);
   }
-
-  button {
-    font-size: 14px;
+  .sidebar.show {
+    left: 0;
+  }
+  .close-sidebar-btn {
+    display: block;
+  }
+  .top-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 15px;
+    align-items: center;
+  }
+  .header-left {
+    display: contents;
+  }
+  .mobile-menu-btn {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .header-right {
+    grid-column: 3;
+    grid-row: 1;
+    width: auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+  }
+  .header-left > div {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .top-header h1 {
+    font-size: 28px;
+  }
+}
+@media (max-width: 650px) {
+  .row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .card {
+    padding: 15px;
   }
 }

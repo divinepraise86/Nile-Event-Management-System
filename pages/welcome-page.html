@@ -34,13 +34,13 @@
                 <p class="subtitle">The unified hub for university events.</p>
 
                 <div class="auth-buttons">
-                    <button class="btn btn-primary" onclick="window.location.href='pages/login.html'">
+                    <button class="btn btn-primary" id="studentLoginBtn">
                         <i class="fa-solid fa-user-graduate"></i>
                         Login as Student
                         <i class="fa-solid fa-arrow-right right-arrow"></i>
                     </button>
 
-                    <button class="btn btn-outline" onclick="window.location.href='pages/login.html'">
+                    <button class="btn btn-outline" id="adminLoginBtn">
                         <i class="fa-solid fa-user-tie"></i>
                         Login as Admin / Host
                         <i class="fa-solid fa-arrow-right right-arrow"></i>
@@ -50,7 +50,7 @@
                         <span>or</span>
                     </div>
 
-                    <button class="btn btn-google">
+                    <button class="btn btn-google" id="googleLoginBtn">
                         <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20px"
                             height="20px">
                             <path fill="#EA4335"
@@ -64,6 +64,7 @@
                         </svg>
                         Continue with Google
                     </button>
+
                 </div>
             </div>
         </div>
@@ -94,7 +95,8 @@
 
     </div>
 
-    <script src="../js/app.js" defer></script>
+    <script type="module" src="../js/welcome-page.js" defer></script>
+    <script type="module" src="../js/firebase-config.js"></script>
 </body>
 
 </html>
