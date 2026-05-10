@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orbit • My Events</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/my-events.css" />
+</head>
+
+<body>
+
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <div class="dashboard-container">
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <aside class="sidebar" id="sidebar">
+            <div>
+                <div class="sidebar-top">
+                    <header class="logo-container">
+                        <img src="../assets/images/orbitsvg.svg" alt="Orbit Logo" class="orbit-logo">
+                        <div class="logo-text">
+                            <span class="bold-text">Orbit</span>
+                            <span class="light-text">Event Hub</span>
+                        </div>
+                    </header>
+                    <button class="close-sidebar-btn" id="closeSidebarBtn"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <nav class="sidebar-menu">
+                    <a href="live-feed.html" class="menu-item"><i class="fa-solid fa-house"></i><span>Home</span></a>
+                    <a href="my-events.html" class="menu-item active"><i class="fa-regular fa-calendar"></i><span>My
+                            Events</span></a>
+                    <a href="create-event.html" class="menu-item" id="adminCreateEventBtn" style="display: none;"><i
+                            class="fa-solid fa-plus"></i><span>Create Event</span></a>
+                    <a href="#" class="logout-btn" id="logoutBtn"><i
+                            class="fa-solid fa-arrow-right-from-bracket"></i><span>Logout</span></a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fa-solid fa-bars"></i></button>
+                    <div>
+                        <h1 class="page-title">My Events</h1>
+                        <p class="page-subtitle">All your saved events & reminders</p>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="searchInput" placeholder="Search saved events..." />
+                    </div>
+                    <div class="profile-circle" id="profileInitials"></div>
+                </div>
+            </header>
+
+            <section class="my-events-wrapper">
+                <div id="savedEventsContainer" class="events-container"></div>
+                <div id="emptyState" class="empty-state">
+                    <div class="empty-icon"><i class="fa-regular fa-calendar"></i></div>
+                    <h2>No Saved Events</h2>
+                    <p>Events you save from the home feed will appear here.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="../js/my-events.js"></script>
+</body>
+
+</html>

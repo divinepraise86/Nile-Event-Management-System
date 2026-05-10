@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Orbit Event Hub</title>
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="login-container">
+        <div class="login-card">
+
+            <header class="login-header">
+                <img src="../assets/images/orbitsvg.svg" alt="Orbit Logo" class="login-logo">
+                <h2>Admin Portal</h2>
+                <p>Welcome back! Please enter your details.</p>
+            </header>
+
+            <form id="loginForm" class="login-form">
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="email" placeholder="admin@nileuniversity.edu.ng" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <!-- ADDED: Inline Error Message Container -->
+                <div id="errorMessage" class="error-message" style="display: none;">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span id="errorText">Error message here.</span>
+                </div>
+
+                <button type="submit" class="btn-submit" id="loginBtn">
+                    Sign In
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <p>Want to use Google instead? <a href="../pages/welcome-page.html">Go back</a></p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FIXED: Pointing to the correct admin JS file -->
+    <script type="module" src="../js/login-admin.js"></script>
+</body>
+
+</html>
