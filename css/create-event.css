@@ -442,3 +442,90 @@ textarea {
     padding: 15px;
   }
 }
+/* =========================================================
+   4. CUSTOM MODAL
+========================================================= */
+.custom-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.custom-modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.custom-modal {
+  background: white;
+  width: 90%;
+  max-width: 380px;
+  border-radius: 24px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  transform: translateY(20px) scale(0.95);
+  transition: all 0.3s ease;
+}
+
+.custom-modal-overlay.show .custom-modal {
+  transform: translateY(0) scale(1);
+}
+
+.modal-icon {
+  width: 60px;
+  height: 60px;
+  background: #fee2e2;
+  color: #ef4444;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin: 0 auto 20px;
+}
+
+.custom-modal h3 {
+  font-size: 22px;
+  color: #111827;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.custom-modal p {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.modal-delete-btn {
+  flex: 1;
+  padding: 14px;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  border: none;
+  background: #ef4444;
+  color: white;
+}
+
+.modal-delete-btn:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+}

@@ -6,11 +6,16 @@ import {
 import {
   doc,
   getDoc,
+  updateDoc,
+  arrayRemove,
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
 const container = document.getElementById("savedEventsContainer");
 const emptyState = document.getElementById("emptyState");
 const searchInput = document.getElementById("searchInput");
+
+let mySavedEvents = [];
+let currentUserId = null;
 
 // ==========================================
 // 1. AUTH & SIDEBAR LOGIC
@@ -20,17 +25,27 @@ onAuthStateChanged(auth, async (user) => {
     window.location.href = "welcome-page.html";
     return;
   }
+  currentUserId = user.uid;
 
-  const userSnap = await getDoc(doc(db, "users", user.uid));
-  if (userSnap.exists()) {
-    const data = userSnap.data();
-    document.getElementById("profileInitials").textContent = data.name
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-      .toUpperCase();
-    if (data.role === "admin")
-      document.getElementById("adminCreateEventBtn").style.display = "flex";
+  try {
+    const userSnap = await getDoc(doc(db, "users", user.uid));
+    if (userSnap.exists()) {
+      const data = userSnap.data();
+      document.getElementById("profileInitials").textContent = data.name
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase();
+      if (data.role === "admin") {
+        document.getElementById("adminCreateEventBtn").style.display = "flex";
+      }
+
+      // Fetch the array of Cloud IDs
+      const savedIds = data.savedEvents || [];
+      fetchSavedEventsData(savedIds);
+    }
+  } catch (error) {
+    console.error("Error loading profile:", error);
   }
 });
 
@@ -41,10 +56,12 @@ document.getElementById("mobileMenuBtn").onclick = () => {
   sidebar.classList.add("show");
   overlay.classList.add("show");
 };
+
 const closeSidebar = () => {
   sidebar.classList.remove("show");
   overlay.classList.remove("show");
 };
+
 document.getElementById("closeSidebarBtn").onclick = closeSidebar;
 overlay.onclick = closeSidebar;
 
@@ -54,16 +71,38 @@ document.getElementById("logoutBtn").onclick = async () => {
 };
 
 // ==========================================
-// 2. REAL SAVED EVENTS & ROUTING LOGIC
+// 2. FETCH CLOUD DATA & RENDER
 // ==========================================
+async function fetchSavedEventsData(savedIds) {
+  if (savedIds.length === 0) {
+    container.innerHTML = "";
+    emptyState.style.display = "block";
+    return;
+  }
 
-// Fetch actual saved events (No more demo data!)
-let mySavedEvents = JSON.parse(localStorage.getItem("savedEvents")) || [];
+  container.innerHTML =
+    "<p style='text-align: center; color: #6b7280; width: 100%;'>Loading your bookmarks from the cloud...</p>";
+  mySavedEvents = [];
+
+  // Loop through IDs and fetch the actual event data
+  for (const id of savedIds) {
+    const eventSnap = await getDoc(doc(db, "events", id));
+    if (eventSnap.exists()) {
+      mySavedEvents.push({ id: eventSnap.id, ...eventSnap.data() });
+    } else {
+      // Clean up orphaned IDs if an admin deleted the event entirely
+      await updateDoc(doc(db, "users", currentUserId), {
+        savedEvents: arrayRemove(id),
+      });
+    }
+  }
+
+  renderEvents(mySavedEvents);
+}
 
 function renderEvents(list) {
   container.innerHTML = "";
 
-  // Trigger Empty State if no events exist
   if (list.length === 0) {
     emptyState.style.display = "block";
     return;
@@ -75,8 +114,8 @@ function renderEvents(list) {
     const card = document.createElement("div");
     card.className = "event-card";
     card.style.animationDelay = `${i * 0.1}s`;
-    card.style.cursor = "pointer"; // Show users they can click it
-    card.dataset.id = ev.id; // Store the ID on the card for routing
+    card.style.cursor = "pointer";
+    card.dataset.id = ev.id;
 
     card.innerHTML = `
       <div class="event-left">
@@ -95,35 +134,42 @@ function renderEvents(list) {
     container.appendChild(card);
   });
 
-  // Handle Unsaving an Event
+  // Handle Cloud Unsaving
   document.querySelectorAll(".unsave-btn").forEach((btn) => {
-    btn.onclick = (e) => {
-      e.stopPropagation(); // Crucial: Stops the card click event from firing!
-      mySavedEvents = mySavedEvents.filter((ev) => ev.id !== btn.dataset.id);
-      localStorage.setItem("savedEvents", JSON.stringify(mySavedEvents));
+    btn.onclick = async (e) => {
+      e.stopPropagation();
+      const eventId = btn.dataset.id;
+
+      // Remove from UI instantly
+      mySavedEvents = mySavedEvents.filter((ev) => ev.id !== eventId);
       renderEvents(mySavedEvents);
+
+      // Remove from Cloud
+      try {
+        await updateDoc(doc(db, "users", currentUserId), {
+          savedEvents: arrayRemove(eventId),
+        });
+      } catch (error) {
+        console.error("Failed to unsave:", error);
+      }
     };
   });
 
-  // Handle Routing to Event Details
+  // Handle Routing to Details
   document.querySelectorAll(".event-card").forEach((card) => {
     card.addEventListener("click", (e) => {
-      // Ignore the click if they were just trying to unsave it
       if (e.target.closest(".unsave-btn")) return;
-
-      const eventId = card.dataset.id;
-      window.location.href = `event-details.html?id=${eventId}`;
+      window.location.href = `event-details.html?id=${card.dataset.id}`;
     });
   });
 }
 
 // Handle Search Filter
-searchInput.oninput = (e) => {
-  const val = e.target.value.toLowerCase();
-  renderEvents(
-    mySavedEvents.filter((ev) => ev.title.toLowerCase().includes(val)),
-  );
-};
-
-// Initial Render
-renderEvents(mySavedEvents);
+if (searchInput) {
+  searchInput.oninput = (e) => {
+    const val = e.target.value.toLowerCase();
+    renderEvents(
+      mySavedEvents.filter((ev) => ev.title.toLowerCase().includes(val)),
+    );
+  };
+}

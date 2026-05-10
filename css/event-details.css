@@ -428,3 +428,22 @@
     flex-direction: column;
   }
 }
+/* =========================================
+   4. HOSTED BADGE (Past Events)
+========================================= */
+.hosted-badge {
+  position: absolute;
+  top: 34px; /* Aligning with the Category Badge and Save Icon */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ecb730; /* Brand Yellow */
+  color: #06359a; /* Brand Blue */
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}

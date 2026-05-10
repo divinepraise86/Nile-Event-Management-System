@@ -181,9 +181,25 @@
             </div>
         </main>
     </div>
+    <div class="custom-modal-overlay" id="dateErrorModal">
+        <div class="custom-modal">
+            <div class="modal-icon">
+                <i class="fa-solid fa-calendar-xmark"></i>
+            </div>
+            <h3>Invalid Date</h3>
+            <p>This event date has passed. You cannot publish an event that is more than 1 week old.</p>
+            <div class="modal-actions">
+                <button class="modal-delete-btn" id="closeDateModalBtn" style="width: 100%;">Got It</button>
+            </div>
+        </div>
+    </div>
 
-    <!-- Ensure this is a module! -->
     <script type="module" src="../js/create-event.js"></script>
+</body>
+
+</html>
+<!-- Ensure this is a module! -->
+<script type="module" src="../js/create-event.js"></script>
 </body>
 
 </html>

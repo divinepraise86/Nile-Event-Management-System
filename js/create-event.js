@@ -165,7 +165,28 @@ if (eventForm) {
     const venue = document.getElementById("eventVenue").value;
     const description = document.getElementById("eventDescription").value;
     const link = document.getElementById("eventLink").value;
-    const imageFile = document.getElementById("fileInput").files[0]; // Grab the physical file!
+    const imageFile = document.getElementById("fileInput").files[0];
+
+    // ========================================================
+    // 🚦 SECURITY CHECK: BLOCK OLD EVENTS
+    // ========================================================
+    const selectedEventDate = new Date(dateInput);
+    const currentDate = new Date();
+
+    // Set both times to midnight to ensure an accurate day-to-day comparison
+    selectedEventDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
+
+    const differenceInTime =
+      currentDate.getTime() - selectedEventDate.getTime();
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+
+    // If the date is 7 or more days in the past, trigger the custom modal and stop!
+    if (differenceInDays >= 7) {
+      document.getElementById("dateErrorModal").classList.add("show");
+      return;
+    }
+    // ========================================================
 
     // Ensure they selected an image
     if (!imageFile) {
@@ -227,9 +248,9 @@ if (eventForm) {
         locationType: locationType,
         description: description,
         registrationLink: link || "",
-        image: finalImageUrl, // The real uploaded image!
+        image: finalImageUrl,
         createdAt: serverTimestamp(),
-        authorId: auth.currentUser.uid,
+        createdBy: auth.currentUser.uid, // 🚦 SAVES THE ADMIN'S ID FOR DELETE PERMISSIONS!
       };
 
       // 4. Send it to the "events" collection in Firestore
@@ -255,5 +276,16 @@ if (eventForm) {
       publishBtn.innerText = originalBtnText;
       publishBtn.disabled = false;
     }
+  });
+}
+// ==========================================
+// 4. CUSTOM MODAL LOGIC
+// ==========================================
+const closeDateModalBtn = document.getElementById("closeDateModalBtn");
+const dateErrorModal = document.getElementById("dateErrorModal");
+
+if (closeDateModalBtn && dateErrorModal) {
+  closeDateModalBtn.addEventListener("click", () => {
+    dateErrorModal.classList.remove("show");
   });
 }
