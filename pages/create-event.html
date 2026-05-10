@@ -1,71 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Event</title>
+    <title>Create Event - Orbit Event Hub</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
     <link rel="stylesheet" href="../css/create-event.css">
     <link rel="stylesheet" href="../css/global.css">
 </head>
+
 <body>
 
-<div class="container">
-    <div class="card">
-        <!-- Heading -->
-        <h2>Create Event</h2>
-        <p class="subtitle">Fill in the details to publish a new event</p>
+    <div class="dashboard-container">
 
-        <form id="eventForm">
-            <!-- Event Title -->
-            <label>Event Title</label>
-            <input type="text" placeholder="e.g. Data Science Workshop">
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-            <!-- Upload Poster -->
-            <label>Upload Poster</label>
-            <div class="upload-box" id="uploadBox">
-                <p id="uploadIcon">📤</p>
-                <span id="uploadText">Drag & drop or click to upload</span>
-                <small id="uploadInfo">JPG, PNG (Max 5MB)</small>
-                <img id="preview" style="display:none; width:100%; margin-top:10px; border-radius:10px;">
-            </div>
-            <input type="file" id="fileInput" accept="image/*" hidden>
-
-        
-
-            <!-- Date and Location -->
-            <div class="row">
-                <div>
-                    <label>Date & Time</label>
-                    <input type="datetime-local">
+        <aside class="sidebar" id="sidebar">
+            <div>
+                <div class="sidebar-top">
+                    <header class="logo-container">
+                        <img src="../assets/images/orbitsvg.svg" alt="Orbit Logo" class="orbit-logo">
+                        <div class="logo-text">
+                            <span class="bold-text">Orbit</span>
+                            <span class="light-text">Event Hub</span>
+                        </div>
+                    </header>
+                    <button class="close-sidebar-btn" id="closeSidebarBtn">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
                 </div>
 
-                <div>
-                    <label>Location Type</label>
-                    <select>
-                        <option>On Campus</option>
-                        <option>Online</option>
-                    </select>
+                <nav class="sidebar-menu">
+                    <a href="live-feed.html" class="menu-item">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="my-events.html" class="menu-item">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span>My Events</span>
+                    </a>
+                    <a href="create-event.html" class="menu-item active" id="adminCreateEventBtn">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Create Event</span>
+                    </a>
+                    <a href="#" class="logout-btn" id="logoutBtn">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        <span>Logout</span>
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div>
+                        <h1>Create Event</h1>
+                        <p>Publish a new event to the campus feed.</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="profile-circle" id="profileInitials"></div>
+                </div>
+            </header>
+
+            <div class="form-wrapper">
+                <div class="split-container">
+
+                    <div class="form-instructions">
+                        <h2>Publishing Guidelines</h2>
+                        <p>We are committed to keeping the university community informed. Please ensure your event
+                            details are accurate and clear.</p>
+
+                        <div class="guideline-item">
+                            <i class="fa-regular fa-image"></i>
+                            <div>
+                                <strong>High-Quality Poster</strong>
+                                <span>Use clear, high-res images (Max 5MB).</span>
+                            </div>
+                        </div>
+                        <div class="guideline-item">
+                            <i class="fa-regular fa-clock"></i>
+                            <div>
+                                <strong>Accurate Timing</strong>
+                                <span>Double-check your dates and times.</span>
+                            </div>
+                        </div>
+                        <div class="guideline-item">
+                            <i class="fa-solid fa-link"></i>
+                            <div>
+                                <strong>Working Links</strong>
+                                <span>Ensure registration or meeting links are active.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <!-- Added an ID to the form to handle submission -->
+                        <form id="eventForm">
+
+                            <div class="row">
+                                <div style="flex: 2;">
+                                    <label for="eventTitle">Event Title</label>
+                                    <input type="text" id="eventTitle" placeholder="e.g. Data Science Workshop"
+                                        required>
+                                </div>
+                                <div style="flex: 1;">
+                                    <label for="eventCategory">Category</label>
+                                    <select id="eventCategory" required>
+                                        <option value="Tech">Tech</option>
+                                        <option value="Music">Music</option>
+                                        <option value="Sports">Sports</option>
+                                        <option value="Workshop">Workshop</option>
+                                        <option value="Career">Career</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div>
+                                    <label for="eventDate">Date & Time</label>
+                                    <input type="datetime-local" id="eventDate" required>
+                                </div>
+                                <div>
+                                    <label for="eventLocationType">Location Type</label>
+                                    <select id="eventLocationType" required>
+                                        <option value="On Campus">On Campus</option>
+                                        <option value="Online">Online</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Full width venue row to give it breathing room -->
+                            <div class="row">
+                                <div style="flex: 1;">
+                                    <label for="eventVenue">Venue / Meeting Link</label>
+                                    <input type="text" id="eventVenue" placeholder="e.g. Room A1, Engineering Building"
+                                        required>
+                                </div>
+                            </div>
+
+                            <label>Upload Poster</label>
+                            <div class="upload-box compact-upload" id="uploadBox">
+                                <p id="uploadIcon">📤</p>
+                                <div class="upload-text-group">
+                                    <span id="uploadText">Drag & drop or click to upload</span>
+                                    <small id="uploadInfo">JPG, PNG (Max 5MB)</small>
+                                </div>
+                                <img id="preview"
+                                    style="display:none; height:40px; border-radius:4px; margin-left:auto;">
+                            </div>
+                            <input type="file" id="fileInput" accept="image/*" hidden>
+
+                            <label for="eventDescription">Description</label>
+                            <textarea id="eventDescription" placeholder="Add a detailed description..."
+                                required></textarea>
+
+                            <label for="eventLink">Registration Link (Optional)</label>
+                            <input type="url" id="eventLink" placeholder="https://forms.gle/...">
+
+                            <!-- Inline success/error messages -->
+                            <p id="formMessage"
+                                style="display: none; text-align: center; margin-top: 10px; font-weight: 600; font-size: 14px;">
+                            </p>
+
+                            <button type="submit" id="publishBtn">🚀 Publish Event</button>
+                        </form>
+                    </div>
+
                 </div>
             </div>
-
-            <!-- Venue -->
-            <label>Venue / Link</label>
-            <input type="text" placeholder="e.g. Room A1, Main Hall, Microsoft Teams">
-
-            <!-- Description -->
-            <label>Description</label>
-            <textarea placeholder="Add a short description..."></textarea>
-
-            <!-- Registration -->
-            <label>Registration Link (Optional)</label>
-            <input type="text" placeholder="https://forms.gle/...">
-
-            <!-- Button -->
-            <button type="submit">🚀 Publish Event</button>
-        </form>
+        </main>
     </div>
-</div>
 
-<script src="../js/create-event.js"></script>
+    <!-- Ensure this is a module! -->
+    <script type="module" src="../js/create-event.js"></script>
 </body>
+
 </html>
