@@ -48,7 +48,7 @@
 
         <nav class="sidebar-menu">
 
-          <a href="index.html" class="menu-item active">
+          <a href="live-feed.html" class="menu-item active">
             <i class="fa-solid fa-house"></i>
             <span>Home</span>
           </a>
@@ -56,6 +56,12 @@
           <a href="my-events.html" class="menu-item">
             <i class="fa-regular fa-calendar"></i>
             <span>My Events</span>
+          </a>
+
+          <!-- NEW: Admin 'Create Event' Button (Hidden by default) -->
+          <a href="create-event.html" class="menu-item" id="adminCreateEventBtn" style="display: none;">
+            <i class="fa-solid fa-plus"></i>
+            <span>Create Event</span>
           </a>
 
           <!-- LOGOUT -->
@@ -168,7 +174,7 @@
     <span id="toastText">Event Saved</span>
   </div>
 
-  <script src="../js/live-feed.js"></script>
+  <script type="module" src="../js/live-feed.js"></script>
 
 </body>
 
