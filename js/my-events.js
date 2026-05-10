@@ -1,272 +1,106 @@
-// my-events.js
+import { auth, db } from "./firebase-config.js";
+import {
+  onAuthStateChanged,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+import {
+  doc,
+  getDoc,
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
-const savedEventsContainer =
-document.getElementById("savedEventsContainer");
+const container = document.getElementById("savedEventsContainer");
+const emptyState = document.getElementById("emptyState");
+const searchInput = document.getElementById("searchInput");
 
-const emptyState =
-document.getElementById("emptyState");
-
-const searchInput =
-document.getElementById("searchInput");
-
-/*
-====================================================
-DEMO EVENTS
-
-These demo events are temporary until Firebase
-backend is connected.
-
-Once Firebase is connected:
-
-1. User toggles save icon on live feed
-2. Event data is stored in Firebase
-3. My Events fetches saved events from Firebase
-4. Event image + info automatically appear here
-5. Event removed from my events when user untoggles save icon on live feed
-
-The image below represents the same image
-coming from the live feed event card.
-====================================================
-*/
-
-const demoEvents = [
-
-  {
-    id:1,
-
-    title:"Orbit Music Festival",
-
-    date:"May 28, 2026",
-
-    time:"7:00 PM",
-
-    location:"Abuja Continental Arena",
-
-    image:
-    "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?q=80&w=1200&auto=format&fit=crop"
-  },
-
-  {
-    id:2,
-
-    title:"Tech Innovators Summit",
-
-    date:"June 4, 2026",
-
-    time:"11:30 AM",
-
-    location:"Civic Innovation Hub",
-
-    image:
-    "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200&auto=format&fit=crop"
-  },
-
-  {
-    id:3,
-
-    title:"Fashion & Culture Expo",
-
-    date:"June 12, 2026",
-
-    time:"5:00 PM",
-
-    location:"Transcorp Hilton",
-
-    image:
-    "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200&auto=format&fit=crop"
-  }
-];
-
-/*
-====================================================
-TEMPORARY STORAGE
-
-If localStorage is empty,
-inject demo events automatically.
-====================================================
-*/
-
-if(!localStorage.getItem("savedEvents")){
-
-  localStorage.setItem(
-    "savedEvents",
-    JSON.stringify(demoEvents)
-  );
-}
-
-/* GET SAVED EVENTS */
-
-let savedEvents =
-JSON.parse(localStorage.getItem("savedEvents")) || [];
-
-
-/* DISPLAY EVENTS */
-
-function displaySavedEvents(events){
-
-  savedEventsContainer.innerHTML = "";
-
-  /* EMPTY STATE */
-
-  if(events.length === 0){
-
-    emptyState.style.display = "block";
-
+// 1. AUTH & SIDEBAR LOGIC
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    window.location.href = "welcome-page.html";
     return;
   }
 
-  emptyState.style.display = "none";
-
-  /* CREATE EVENT CARDS */
-
-  events.forEach((event,index) => {
-
-    const eventCard =
-    document.createElement("div");
-
-    eventCard.classList.add("event-card");
-
-    /* STAGGER ANIMATION */
-
-    eventCard.style.animationDelay =
-    `${index * 0.08}s`;
-
-    eventCard.innerHTML = `
-
-      <div class="event-left">
-
-        <!-- EVENT IMAGE -->
-        <div class="event-image">
-
-          <!--
-          FUTURE FIREBASE LINKAGE:
-
-          src="${event.image}"
-
-          Image will come directly from the
-          live feed event card database.
-          -->
-
-          <img src="${event.image}" alt="${event.title}">
-
-        </div>
-
-        <!-- EVENT DETAILS -->
-
-        <div class="event-details">
-
-          <h3>${event.title}</h3>
-
-          <div class="event-meta">
-
-            <span>
-              <i class="fa-regular fa-calendar"></i>
-              ${event.date}
-            </span>
-
-            <span>
-              <i class="fa-regular fa-clock"></i>
-              ${event.time}
-            </span>
-
-            <span>
-              <i class="fa-solid fa-location-dot"></i>
-              ${event.location}
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- UNSAVE -->
-
-      <button
-        class="unsave-btn"
-        data-id="${event.id}"
-      >
-        Unsave
-      </button>
-    `;
-
-    savedEventsContainer.appendChild(eventCard);
-  });
-
-  /* UNSAVE LOGIC */
-
-  const unsaveButtons =
-  document.querySelectorAll(".unsave-btn");
-
-  unsaveButtons.forEach((button) => {
-
-    button.addEventListener("click", () => {
-
-      const eventId =
-      Number(button.dataset.id);
-
-      /* REMOVE EVENT */
-
-      savedEvents =
-      savedEvents.filter(
-        (event) => event.id !== eventId
-      );
-
-      /* UPDATE STORAGE */
-
-      localStorage.setItem(
-        "savedEvents",
-        JSON.stringify(savedEvents)
-      );
-
-      /* REFRESH UI */
-
-      displaySavedEvents(savedEvents);
-      
-      /*Run 'localStorage.removeItem("savedEvents");' in browser developer console
-      to display unsaved event cards again for testing purposes*/
-
-    });
-  });
-}
-
-/* SEARCH */
-
-searchInput.addEventListener("input", (e) => {
-
-  const value =
-  e.target.value.toLowerCase();
-
-  const filteredEvents =
-  savedEvents.filter((event) =>
-
-    event.title
-    .toLowerCase()
-    .includes(value)
-  );
-
-  displaySavedEvents(filteredEvents);
+  // Handle Initials & Admin Button
+  const userSnap = await getDoc(doc(db, "users", user.uid));
+  if (userSnap.exists()) {
+    const data = userSnap.data();
+    document.getElementById("profileInitials").textContent = data.name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase();
+    if (data.role === "admin")
+      document.getElementById("adminCreateEventBtn").style.display = "flex";
+  }
 });
 
-/* INITIAL RENDER */
+// 2. SIDEBAR TOGGLES
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("sidebarOverlay");
 
-displaySavedEvents(savedEvents);
+document.getElementById("mobileMenuBtn").onclick = () => {
+  sidebar.classList.add("show");
+  overlay.classList.add("show");
+};
 
-/*
-====================================================
-FUTURE FIREBASE STRUCTURE IDEA
+const closeSidebar = () => {
+  sidebar.classList.remove("show");
+  overlay.classList.remove("show");
+};
 
-Example:
+document.getElementById("closeSidebarBtn").onclick = closeSidebar;
+overlay.onclick = closeSidebar;
 
-const event = {
+document.getElementById("logoutBtn").onclick = async () => {
+  await signOut(auth);
+  window.location.href = "welcome-page.html";
+};
 
-  id: doc.id,
-  title: data.title,
-  image: data.image,
-  date: data.date,
-  time: data.time,
-  location: data.location
+// 3. SEARCH & DISPLAY (Placeholder Data for now)
+let mySavedEvents = JSON.parse(localStorage.getItem("savedEvents")) || [];
+
+function renderEvents(list) {
+  container.innerHTML = "";
+  if (list.length === 0) {
+    emptyState.style.display = "block";
+    return;
+  }
+  emptyState.style.display = "none";
+
+  list.forEach((ev, i) => {
+    const card = document.createElement("div");
+    card.className = "event-card";
+    card.style.animationDelay = `${i * 0.1}s`;
+    card.innerHTML = `
+      <div class="event-left">
+        <div class="event-image"><img src="${ev.image}"></div>
+        <div class="event-details">
+          <h3>${ev.title}</h3>
+          <div class="event-meta">
+            <span><i class="fa-regular fa-calendar"></i> ${ev.date}</span>
+            <span><i class="fa-regular fa-clock"></i> ${ev.time}</span>
+            <span><i class="fa-solid fa-location-dot"></i> ${ev.location}</span>
+          </div>
+        </div>
+      </div>
+      <button class="unsave-btn" data-id="${ev.id}">Unsave</button>
+    `;
+    container.appendChild(card);
+  });
+
+  document.querySelectorAll(".unsave-btn").forEach((btn) => {
+    btn.onclick = () => {
+      mySavedEvents = mySavedEvents.filter((e) => e.id != btn.dataset.id);
+      localStorage.setItem("savedEvents", JSON.stringify(mySavedEvents));
+      renderEvents(mySavedEvents);
+    };
+  });
 }
 
-====================================================
-*/
+searchInput.oninput = (e) => {
+  const val = e.target.value.toLowerCase();
+  renderEvents(
+    mySavedEvents.filter((ev) => ev.title.toLowerCase().includes(val)),
+  );
+};
+
+renderEvents(mySavedEvents);
