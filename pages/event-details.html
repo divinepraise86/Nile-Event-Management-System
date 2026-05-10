@@ -1,123 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Orbit - Event Details</title>
+  <title>Orbit • Event Details</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-  />
-
+  <link rel="stylesheet" href="../css/global.css">
   <link rel="stylesheet" href="../css/event-details.css" />
 </head>
-<body>
 
-  <!-- Toast Notification -->
- <div class="save-toast" id="saveToast">
-  <i class="fa-solid fa-bookmark"></i>
-  <span id="toastText">Event Saved</span>
-</div>
+<body class="event-details-page">
 
-  <main class="event-page">
+  <div class="save-toast" id="saveToast">
+    <i class="fa-solid fa-bookmark"></i>
+    <span id="toastText">Event Saved</span>
+  </div>
 
-    <!-- Event Detail Container -->
-    <section class="event-detail-card" id="eventDetailCard">
+  <div class="dashboard-container">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-      <!-- Event Image -->
-      <div class="event-image-wrapper">
-
-        <span class="event-badge" id="locationBadge">
-          On Campus
-        </span>
-
-        <button class="save-icon" id="saveBtn">
-          <i class="fa-regular fa-bookmark"></i>
-        </button>
-
-        <img
-          id="eventPoster"
-          src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop"
-          alt="Event Poster"
-        />
+    <aside class="sidebar" id="sidebar">
+      <div>
+        <div class="sidebar-top">
+          <header class="logo-container">
+            <img src="../assets/images/orbitsvg.svg" alt="Orbit Logo" class="orbit-logo">
+            <div class="logo-text">
+              <span class="bold-text">Orbit</span>
+              <span class="light-text">Event Hub</span>
+            </div>
+          </header>
+          <button class="close-sidebar-btn" id="closeSidebarBtn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <nav class="sidebar-menu">
+          <a href="live-feed.html" class="menu-item"><i class="fa-solid fa-house"></i><span>Home</span></a>
+          <a href="my-events.html" class="menu-item"><i class="fa-regular fa-calendar"></i><span>My Events</span></a>
+          <a href="create-event.html" class="menu-item" id="adminCreateEventBtn" style="display: none;"><i
+              class="fa-solid fa-plus"></i><span>Create Event</span></a>
+          <a href="#" class="logout-btn" id="logoutBtn"><i
+              class="fa-solid fa-arrow-right-from-bracket"></i><span>Logout</span></a>
+        </nav>
       </div>
+    </aside>
 
-
-      <!-- Event Information -->
-      <div class="event-content">
-
-        <div class="event-heading-section">
-          <h2 id="eventTitle">Tech Innovation Workshop</h2>
-        </div>
-
-
-        <div class="event-meta-grid">
-
-          <div class="meta-item">
-            <i class="fa-regular fa-calendar"></i>
-            <span id="eventDate">May 20, 2026</span>
+    <main class="main-content details-bg">
+      <header class="top-header">
+        <div class="header-left">
+          <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fa-solid fa-bars"></i></button>
+          <div>
+            <h1 class="page-title">Event Details</h1>
+            <a href="live-feed.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Feed</a>
           </div>
-
-          <div class="meta-item">
-            <i class="fa-regular fa-clock"></i>
-            <span id="eventTime">10:00 AM - 12:00 PM</span>
-          </div>
-
-          <div class="meta-item full-width">
-            <i class="fa-solid fa-location-dot"></i>
-            <span id="eventVenue">
-              Room A1, Engineering Building
-            </span>
-          </div>
-
         </div>
-
-
-        <div class="divider"></div>
-
-
-        <!-- Full Description -->
-        <div class="event-description">
-          <p id="eventDescription">
-            Join us for an immersive and interactive workshop exploring the latest innovations in Artificial Intelligence, software engineering, robotics, and startup technology.
-
-            Students will engage in hands-on demonstrations, networking sessions, and practical discussions led by experienced industry professionals.
-
-            Open to all students. Limited seats available.
-          </p>
+        <div class="header-right">
+          <div class="profile-circle" id="profileInitials"></div>
         </div>
+      </header>
 
-
-        <!-- Action Buttons -->
-        <div class="action-buttons" id="actionButtons">
-
-          <a
-            href="#"
-            target="_blank"
-            id="registerBtn"
-            class="primary-btn"
-          >
-            <span>Register Now</span>
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          </a>
-
-
-          <button id="reminderBtn" class="secondary-btn">
-            <i class="fa-regular fa-calendar-plus"></i>
-            <span>Set Reminder</span>
+      <section class="event-detail-card" id="eventDetailCard" style="display: none;">
+        <div class="event-image-wrapper">
+          <span class="event-badge" id="eventCategory">Category</span>
+          <button class="save-icon" id="saveBtn">
+            <i class="fa-regular fa-bookmark"></i>
           </button>
-
+          <img id="eventPoster" src="" alt="Event Poster" />
         </div>
 
-      </div>
-    </section>
-  </main>
+        <div class="event-content">
+          <div class="event-heading-section">
+            <h2 id="eventTitle">Loading...</h2>
+          </div>
 
-  <script src="../js/event-details.js"></script>
+          <div class="event-meta-grid">
+            <div class="meta-item">
+              <i class="fa-regular fa-calendar"></i>
+              <span id="eventDate">...</span>
+            </div>
+            <div class="meta-item">
+              <i class="fa-regular fa-clock"></i>
+              <span id="eventTime">...</span>
+            </div>
+            <div class="meta-item full-width">
+              <i class="fa-solid fa-location-dot"></i>
+              <span id="eventVenue">...</span>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="event-description">
+            <p id="eventDescription">Loading description...</p>
+          </div>
+
+          <div class="action-buttons" id="actionButtons">
+            <a href="#" target="_blank" id="registerBtn" class="primary-btn">
+              <span>Register Now</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+            <button id="reminderBtn" class="secondary-btn">
+              <i class="fa-regular fa-calendar-plus"></i>
+              <span>Add to Calendar</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <div id="loadingState" style="text-align: center; padding: 50px; color: #6b7280;">
+        <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 24px; margin-bottom: 10px;"></i>
+        <p>Fetching event details...</p>
+      </div>
+
+    </main>
+  </div>
+
+  <script type="module" src="../js/event-details.js"></script>
 </body>
+
 </html>
